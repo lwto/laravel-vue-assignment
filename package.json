@@ -6,15 +6,26 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@vue-leaflet/vue-leaflet": "^0.10.1",
         "autoprefixer": "^10.4.16",
-        "axios": "^1.6.4",
+        "axios": "^1.6.5",
         "laravel-vite-plugin": "^1.0.0",
-        "postcss": "^8.4.33",
         "tailwindcss": "^3.4.1",
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^40.2.0",
+        "@ckeditor/ckeditor5-vue": "^5.1.0",
+        "@maptiler/sdk": "^1.2.1",
         "@vitejs/plugin-vue": "^5.0.3",
-        "vue": "^3.4.13"
+        "@vuelidate/core": "^2.0.3",
+        "@vuelidate/validators": "^2.0.4",
+        "jquery": "^3.7.1",
+        "leaflet-locationpicker": "^0.3.4",
+        "mapbox": "^1.0.0-beta10",
+        "vue": "^3.4.13",
+        "vue-axios": "^3.5.2",
+        "vue-router": "^4.2.5",
+        "vuelidate": "^0.7.7"
     }
 }

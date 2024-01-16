@@ -1,8 +1,15 @@
 import { createApp } from "vue";
-import Test from './components/Test.vue';
+import router from './router/index';
+import AppComponent from './app.vue';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
-const app = createApp()
+const app = createApp({
+    components: {
+        AppComponent
+    }
+});
 
-app.component('test', Test)
 
+app.use( CKEditor );
+app.use(router);
 app.mount('#app')
