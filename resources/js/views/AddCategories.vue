@@ -124,7 +124,7 @@ export default {
             categories:{},
             name: '',
             photo: '',
-            status: 0,
+            status: 1,
             showMenu: false,
             
         }
@@ -150,10 +150,7 @@ export default {
         formData.append('photo', this.categories.photo);
         formData.append('status', this.status);
         await axios.post('/api/save-category', formData).then(response=>{
-                console.log(response);
-                if(response.data.code == 200){
-                    this.$router.push({ name: 'categories' });
-                }
+                this.$router.push({ name: 'categories' });
                 }).catch(error=>{
                     console.log(error)
 

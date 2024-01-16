@@ -40,12 +40,12 @@
                     </div>
                  </div>
                  <!-- Sign in Button -->
-                 <button 
-                    class="block bg-blue p-1 rounded w-full text-white mt-5 "
-                    type="submit"
+                 <router-link :to="{name: 'item'}"
+                   
                  >
-                    Sign In
-                </button>
+                    <div  class="block bg-blue p-1 text-center rounded w-full text-white mt-5 "
+                   >Sign In</div>
+                 </router-link>
             </form>
         </div>
     </div>

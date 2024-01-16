@@ -202,7 +202,7 @@
                     categories:{},
                     item_name: '',
                     category: '',
-                    status: 0,
+                    status: 1,
                     description: '',
                     condition: '',
                     type: '',
@@ -239,7 +239,7 @@
             },
                 async saveItem(){
                 let formData = new FormData();
-                formData.append('item_name', this.items.name);
+                formData.append('item_name', this.items.item_name);
                 formData.append('category', this.items.category);
                 formData.append('price', this.items.price);
                 formData.append('description', this.items.description);
@@ -250,6 +250,7 @@
                 formData.append('owner_name', this.items.owner_name);
                 formData.append('contact', this.items.contact);
                 formData.append('address', this.items.address);
+                
                 await axios.post('/api/save-item', formData).then(response=>{
                 console.log(response);
                 if(response.data.code == 200){
@@ -266,7 +267,7 @@
                     $("#file-name").text(this.files[0].name);
                     });
 
-                    map = L.map('map').setView([16.871311, 96.199379], 13);
+                    map = L.map('map').setView([16.871311, 96.199379], 15);
                     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                     maxZoom: 20,
                     id: 'streets-v12',
