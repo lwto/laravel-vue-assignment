@@ -37,7 +37,7 @@ class ItemController extends Controller
 
         ]);
         $items->save();
-        return response()->json('Items created!');
+        return response()->json('Item created!');
     }
 
     public function delete($id)
@@ -55,7 +55,7 @@ class ItemController extends Controller
         } else {
             return response()->json(
                 [
-                    'message' => 'Item with $id does not exit',
+                    'message' => 'Item does not exit',
 
                 ]
             );

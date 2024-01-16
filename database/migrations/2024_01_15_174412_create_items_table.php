@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('condition');
             $table->string('type');
-            $table->boolean('status')->default(1);
+            $table->string('status');
             $table->string('photo');
             $table->string('owner_name');
             $table->string('contact');

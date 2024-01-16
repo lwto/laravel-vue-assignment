@@ -19,6 +19,18 @@ class CategoryController extends Controller
             ]
         );
     }
+    public function publish()
+    {
+        $categories = Category::all()->where('status', '1');
+        return response()->json(
+            [
+                'categories' => $categories,
+                'message' => 'Categories',
+                'code' => 200
+
+            ]
+        );
+    }
     public function store(Request $request)
     {
         $categories = new Category([

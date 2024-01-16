@@ -77,12 +77,12 @@
                                 <!-- Item Name -->
                                 <div class="mt-3">
                                     <label for="name" class="block mb-2 text-sm">Item Name <span class="text-red">*</span></label>
-                                    <input v-model="items.item_name" type="text" id="name" class=" border border-lightGray text-sm rounded block w-full px-2.5 py-1.5 focus:outline-none text-gray" placeholder="Your Name" required>
+                                    <input v-model="items.item_name" type="text" id="name" name="item_name" class=" border border-lightGray text-sm rounded block w-full px-2.5 py-1.5 focus:outline-none text-gray" placeholder="Your Name" required>
                                 </div>
                                 <!-- Select Category -->
                                 <div class="mt-3">
                                     <label for="categories" class="block mb-2 text-sm">Select Category <span class="text-red">*</span></label>
-                                    <select v-model="items.category" id="categories" class="text-gray border border-lightGray text-sm rounded p-2 w-full">
+                                    <select name="category" v-model="items.category" id="categories" class="text-gray border border-lightGray text-sm rounded p-2 w-full">
                                         <option selected>Select Category</option>
                                         <option v-for="category in categories" :value="category.name">{{ category.name }}</option>
                                     </select>                                
@@ -90,17 +90,17 @@
                                 <!-- Price -->
                                 <div class="mt-3">
                                     <label for="price" class="block mb-2 text-sm">Price <span class="text-red">*</span></label>
-                                    <input type="price" v-model="items.price" id="price" class=" border border-lightGray text-sm rounded block w-full px-2.5 py-1.5 focus:outline-none text-gray" placeholder="Enter Price" required>
+                                    <input type="text" name="price" v-model="items.price" id="price" class=" border border-lightGray text-sm rounded block w-full px-2.5 py-1.5 focus:outline-none text-gray" placeholder="Enter Price" required>
                                 </div>
                                 <!-- text editor -->
                                 <div class="mt-3 z-0">
-                                    <label for="description" class="block mb-2 text-sm">Description <span class="text-red">*</span></label>
+                                    <label class="block mb-2 text-sm">Description <span class="text-red">*</span></label>
                                     <ckeditor :editor="editor" v-model="items.description" :config="editorConfig"></ckeditor>
                                 </div>
                                 <!-- Item condition -->
                                 <div class="mt-3">
                                     <label for="condition" class="block mb-2 text-sm">Select Item Condition <span class="text-red">*</span></label>
-                                    <select v-model="items.condition" id="condition" class="text-gray border border-lightGray text-sm rounded p-2 w-full">
+                                    <select v-model="items.condition" id="condition" name="condition" class="text-gray border border-lightGray text-sm rounded p-2 w-full">
                                         <option selected>Select Item Condition</option>
                                         <option value="New">New</option>
                                         <option value="Used">Used</option>
@@ -109,8 +109,8 @@
                                 </div>
                                 <!-- Item Type -->
                                 <div class="mt-3">
-                                    <label for="type" class="block mb-2 text-sm">Select Item Type <span class="text-red">*</span></label>
-                                    <select id="type" v-model="items.type" class="text-gray border border-lightGray text-sm rounded p-2 w-full">
+                                    <label for="type"  class="block mb-2 text-sm">Select Item Type <span class="text-red">*</span></label>
+                                    <select id="type" name="type"  v-model="items.type" class="text-gray border border-lightGray text-sm rounded p-2 w-full">
                                         <option selected>Select Item Type</option>
                                         <option value="For Sell">For Sell</option>
                                         <option value="For Buy">For Buy</option>
@@ -120,24 +120,27 @@
                                 <!-- Status -->
                                 <p class="mt-3 text-sm mb-2">Status</p>
                                 <div class="flex items-center me-4">
-                                    <input id="status" type="checkbox" value="publish" class="text-blue w-4 h-4 border-gray rounded bg-blue">
+                                    <input v-model="items.status" true-value=1 false-value=0  id="status" type="checkbox"  name="status" class="text-blue w-4 h-4 border-gray rounded bg-blue">
                                     <label for="status" class="ms-2 text-sm hover:cursor-pointer">Publish</label>
                                 </div>
+                                
                                 <!-- Upload Photo -->
                                 <p for="category" class="block mb-1 text-sm mt-3">Category Photo <span class="text-red">*</span></p>
                                 <p class="text-gray text-xs mb-2">Recommended size 400 x 200</p>
                                 <div class="flex items-center justify-center w-full">
                                 
-                                    <label for="file_upload" class="flex flex-col items-center justify-center w-full h-64 border-lightGray border rounded cursor-pointer ">
-                                        <div id="file_name" class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <label for="file-upload" class="flex flex-col items-center justify-center w-full h-64 border-lightGray border rounded cursor-pointer ">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                             <svg class="w-8 h-8 mb-4 text-gray" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                                             </svg>
-                                            <p class="text-sm text-gray">Drag and drop here</p>
-                                            <p class="mb-2 text-sm text-gray">or</p>
-                                            <div class="text-white bg-blue font-medium rounded px-5 py-1.5 focus:outline-none text-sm">Choose Files</div>
+                                            <div id="file-name">
+                                                <p class="text-sm text-gray">Drag and drop here</p>
+                                                <p class="mb-2 text-sm text-gray text-center">or</p>
+                                                <div class="text-white bg-blue font-medium rounded px-5 py-1.5 focus:outline-none text-sm">Choose Files</div>
+                                            </div>
                                         </div>
-                                        <input id="file_upload" type="file" class="hidden" name="photo"  />
+                                        <input id="file-upload" v-on:change="items.photo" type="file" class="hidden" name="photo"  />
                                     </label>
                                 </div> 
                                 
@@ -146,20 +149,22 @@
                                 <p>Owner Information</p>
                                 <div class="mt-3">
                                     <label for="owner-name" class="block mb-2 text-sm">Owner Name <span class="text-red">*</span></label>
-                                    <input v-model="items.owner_name" type="owner-name" id="owner-name" class=" border border-lightGray text-sm rounded block w-full px-2.5 py-1.5 focus:outline-none text-gray" placeholder="Your Name" required>
+                                    <input v-model="items.owner_name" type="text" id="owner-name"  name="owner_name" class=" border border-lightGray text-sm rounded block w-full px-2.5 py-1.5 focus:outline-none text-gray" placeholder="Your Name" required>
                                 </div>
                                 <div class="mt-3">
                                     <p class="block mb-2 text-sm">Contact Number</p>
                                     <div class=" flex">
-                                        <select  id="country-code" class="text-sm p-2 px-4 items-center min-w-fit rounded-s-md border border-e-0 border-lightGray">
+                                        <select id="country-code" v-model="items.country_code" class="text-sm p-2 px-4 items-center min-w-fit rounded-s-md border border-e-0 border-lightGray">
+                                            <option selected>+ 95</option>
+                                            <option selected>+ 95</option>
                                             <option selected>+ 95</option>
                                             
                                         </select>                                        
-                                        <input v-model="items.contact" type="text" id="number" class="py-2 px-3 pe-11 block w-full border border-lightGray shadow-sm rounded-e-lg text-sm focus:outline-none " placeholder="Add Number">
+                                        <input v-model="items.contact" type="text" name="contact" id="number" class="py-2 px-3 pe-11 block w-full border border-lightGray shadow-sm rounded-e-lg text-sm focus:outline-none " placeholder="Add Number">
                                     </div>                               
                                 </div>
                                 <div class="mt-3 ">
-                                    <label for="address" class="block mb-2 text-sm">Address</label>
+                                    <label for="address" class="block mb-2 text-sm p-2">Address</label>
                                     <textarea v-model="items.address" name="address" id="address"  rows="3" class=" border border-lightGray w-full rounded"></textarea>
                                 </div>
                                 <!-- Map -->
@@ -186,8 +191,7 @@
     import jQuery from 'jquery';
     import $ from 'jquery';
     import L from 'leaflet';
-        let map;
-        let mapInitialized;
+    import { required } from '@vuelidate/validators'
         
         export default {  
             data() {
@@ -202,78 +206,82 @@
                     categories:{},
                     item_name: '',
                     category: '',
-                    status: 1,
+                    price: '',
                     description: '',
                     condition: '',
                     type: '',
+                    status: 0,
                     photo: '',
-                    price: '',
                     owner_name: '',
                     contact: '',
                     address: '',
-
-                    
-                          
+     
                 };
             },
+
             computed: {
                 currentRouteName() {
                     return this.$route.name;
                     },
             },
+
             created(){
-            this.getCategories();
+                this.getCategories();
              },
+
             methods:{
                 toggleNav: function () {
                 this.showMenu = !this.showMenu;
                 },
+
                 async getCategories(){
-                await axios.get('/api/category-list').then(response=>{
-                    this.categories = response.data.categories;
-                    console.log(this.categories);
-                }).catch(error=>{
-                    console.log(error)
-                    this.categories = []
-                })
-            },
+                    await axios.get('/api/publish-category').then(response=>{
+                        this.categories = response.data.categories;
+                        console.log(this.categories);
+                    }).catch(error=>{
+                        console.log(error)
+                        this.categories = []
+                    })
+                },
+
                 async saveItem(){
-                let formData = new FormData();
-                formData.append('item_name', this.items.item_name);
-                formData.append('category', this.items.category);
-                formData.append('price', this.items.price);
-                formData.append('description', this.items.description);
-                formData.append('condition', this.items.condition);
-                formData.append('type', this.items.type);
-                formData.append('status', this.items.status);
-                formData.append('photo', this.items.photo);
-                formData.append('owner_name', this.items.owner_name);
-                formData.append('contact', this.items.contact);
-                formData.append('address', this.items.address);
+                    let formData = new FormData();
+                    formData.append('item_name', this.items.item_name);
+                    formData.append('category', this.items.category);
+                    formData.append('price', this.items.price);
+                    formData.append('description', this.items.description);
+                    formData.append('condition', this.items.condition);
+                    formData.append('type', this.items.type);
+                    formData.append('status', this.items.status);
+                    formData.append('photo', this.items.photo);
+                    formData.append('owner_name', this.items.owner_name);
+                    formData.append('contact', this.items.country_code + this.items.contact);
+                    formData.append('address', this.items.address);
                 
                 await axios.post('/api/save-item', formData).then(response=>{
-                console.log(response);
-                if(response.data.code == 200){
+                    console.log(this.items);
                     this.$router.push({ name: 'item' });
-                }
+                    
                 }).catch(error=>{
-                    console.log(error)
-
+                    console.log(error);
+                
                 })
                 }
                 },
+
                 mounted(){
                     $("#file-upload").change(function(){
-                    $("#file-name").text(this.files[0].name);
+                        $("#file-name").text(this.files[0].name);
                     });
 
+                    let map;
                     map = L.map('map').setView([16.871311, 96.199379], 15);
                     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                     maxZoom: 20,
                     id: 'streets-v12',
                     accessToken: 'pk.eyJ1IjoibGlud2F0aGFuIiwiYSI6ImNscmV3bHBmZzFqOGUybG13dnNtNzcxeWIifQ.q9lvX62JZGoZ9elRZNtAGw',
                     attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
-                }).addTo(map);
+                     }).addTo(map);
              
             }
 

@@ -69,23 +69,7 @@ import { required, email } from '@vuelidate/validators'
         }
         },
         methods:{
-            async login() {
-            this.$store
-                .dispatch("login", {
-                    email: this.email,
-                    password: this.password,
-
-                })
-                .then((response) => {
-                    this.$router.push({ name: 'item' });
-
-                })
-                .catch((err) => {
-                    if(err.response != undefined){
-                        displayError(err.response.data.message)
-                    }
-                });
-            },
+            
             showlogpass(){
                 this.showpassword=!this.showpassword
                 var elem= document.querySelector('#password')

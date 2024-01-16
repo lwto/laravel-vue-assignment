@@ -90,14 +90,14 @@
                                         <div class="text-white bg-blue font-medium rounded text-sm px-5 py-1.5 focus:outline-none text-sm" >Choose Files</div>
                                     </div>
                                 </div>
-                                <input id="file-upload"   type="file" name="photo" class="hidden" required/>
+                                <input id="file-upload" v-on:change="categories.photo"  type="file" name="photo" class="hidden" required/>
                             </label>
                         </div> 
                         
                         <!-- Status -->
                         <p class="mt-3 text-sm mb-2">Status</p>
                         <div class="flex items-center me-4">
-                            <input id="status" v-model="categories.status"  type="checkbox" value="1" class="text-blue w-4 h-4 border-gray rounded bg-blue" />
+                            <input id="status" v-model="categories.status" true-value="1" false-value="0"  type="checkbox" class="text-blue w-4 h-4 border-gray rounded bg-blue" />
                             <label for="status" class="block ml-2 text-sm">Publish</label>
                         </div>
                         <!-- Buttons -->
@@ -124,7 +124,7 @@ export default {
             categories:{},
             name: '',
             photo: '',
-            status: 1,
+            status: "0",
             showMenu: false,
             
         }
@@ -144,19 +144,21 @@ export default {
         toggleNav: function () {
         this.showMenu = !this.showMenu;
         },
-       async saveCategory(){
-        let formData = new FormData();
-        formData.append('name', this.categories.name);
-        formData.append('photo', this.categories.photo);
-        formData.append('status', this.status);
-        await axios.post('/api/save-category', formData).then(response=>{
+
+        async saveCategory(){
+            let formData = new FormData();
+            formData.append('name', this.categories.name);
+            formData.append('photo', this.categories.photo);
+            formData.append('status', this.categories.status);
+            await axios.post('/api/save-category', formData).then(response=>{
                 this.$router.push({ name: 'categories' });
+                
                 }).catch(error=>{
                     console.log(error)
 
                 })
-       }
-    },
+            }
+        },
     mounted(){
         $("#file-upload").change(function(){
         $("#file-name").text(this.files[0].name);
