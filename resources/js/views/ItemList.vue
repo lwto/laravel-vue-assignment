@@ -66,7 +66,7 @@
                 <!-- Table -->
                 <div class="flex mt-5 space-x-3 items-center ">
                     <p>Show:</p>
-                    <select v-model="per_page" class="text-gray border border-lightGray text-sm rounded p-2 " @change="getCategories">
+                    <select v-model="per_page" class="text-gray border border-lightGray text-sm rounded p-2 " @change="getItems">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -157,7 +157,7 @@
                 <!-- Pagination -->
                     <div class="mt-4 flex flex-col space-y-3 justify-between items-center md:flex-row">
                     <p class="text-sm">Showing {{ pageInfo.per_page }} to {{ pageInfo.total }} entries</p>
-                    <Page :total="pageInfo.total" :current="pageInfo.current_page" :page-size="parseInt(pageInfo.per_page)" @on-change="getCategories" v-if="pageInfo" />
+                    <Page :total="pageInfo.total" :current="pageInfo.current_page" :page-size="parseInt(pageInfo.per_page)" @on-change="getItems" v-if="pageInfo" />
                 </div>
 
             </div>
