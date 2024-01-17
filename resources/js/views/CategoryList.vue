@@ -64,12 +64,14 @@
                     <router-link :to="{name: 'add-categories'}" class="px-4 py-2 rounded bg-blue text-white">+ Add Categories</router-link>
                 </div>
                 <!-- Table -->
-                <!-- <div class="flex mt-5 space-x-3 ">
+                <div class="flex mt-5 space-x-3 items-center ">
                     <p>Show:</p>
-                    <select>
-                        <option>1</option>
+                    <select v-model="per_page" class="text-gray border border-lightGray text-sm rounded p-2 " @change="getCategories">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
                     </select>
-                </div> -->
+                </div>
                 <div class="relative overflow-x-auto mt-6">
                     <table class="w-full text-sm text-left rtl:text-left">
                         <thead class="text-xs text-white uppercase bg-blue">
@@ -89,7 +91,7 @@
                             </tr>
                         </thead>
                         <tbody v-if="categories.length > 0">
-                            <tr v-for="(category,key) in categories" :key="key" class="bg-white border-b border-lightGray">
+                            <tr v-for="(category,i) in categories" :key="i" class="bg-white border-b border-lightGray">
                                 <td scope="row" class="px-6 py-3 font-medium whitespace-nowrap">
                                     <div class="flex space-x-1">
                                         <router-link to="#"  class="bg-green rounded p-1 px-2">
@@ -101,7 +103,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{ category.id }}
+                                    {{category.id}}
                                 </td>
                                 <td class="px-6 py-3">
                                     {{ category.name }}
@@ -127,39 +129,12 @@
 
                    
                 </div>
-                 <!-- Pagination -->
-                 <!-- <nav class="mt-5 flex flex-col items-start md:items-center justify-between space-y-4 md:flex-row">
-                    <p class="text-gray text-sm">Showing 1 to 100 entries</p>
-                    <ul class="list-style-none flex space-x-1 justify-end">
-                        <li>
-                        <a
-                            class="pointer-events-none relative block rounded shadow px-3 py-1 text-sm transition-all duration-300 text-gray"
-                            ><i class="fa-solid fa-angles-left"></i></a
-                        >
-                        </li>
-                        <li aria-current="page">
-                        <a
-                            class="relative block rounded shadow bg-blue text-white px-3 py-1 text-sm transition-all duration-300 hover:bg-lightGray hover:text-black"
-                            href="#!"
-                            >1</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            class="relative block rounded shadow px-3 py-1 text-sm transition-all duration-300 hover:bg-lightGray hover:text-black"
-                            href="#!"
-                            >2</a
-                        >
-                        </li>
-                        <li>
-                            <a
-                            class="pointer-events-none relative block rounded shadow px-3 py-1 text-sm transition-all duration-300 text-gray"
-                            ><i class="fa-solid fa-angles-right"></i></a
-                        >
-                        </li>
-                    </ul>
-                </nav> -->
 
+                <!-- Pagination -->
+                <div class="mt-4 flex flex-col space-y-3 justify-between items-center md:flex-row">
+                    <p class="text-sm">Showing {{ pageInfo.per_page }} to {{ pageInfo.total }} entries</p>
+                    <Page :total="pageInfo.total" :current="pageInfo.current_page" :page-size="parseInt(pageInfo.per_page)" @on-change="getCategories" v-if="pageInfo" />
+                </div>
             </div>
         </div>
     </div>
@@ -168,7 +143,6 @@
 <script>
 import axios from 'axios';
 
-
 export default {
     name:'categories',
 
@@ -176,6 +150,9 @@ export default {
         return {
             categories:[],
             showMenu: false,
+            total:1,
+            pageInfo:null,
+            per_page: 10
         }
     },
     computed: {
@@ -188,18 +165,21 @@ export default {
     },
     methods:{
         toggleNav: function () {
-        this.showMenu = !this.showMenu;
+        this.showMenu = !this.showMenu;d
         },
-        async getCategories(){
-            await axios.get('/api/category-list').then(response=>{
-                this.categories = response.data.categories;
-                console.log(this.categories);
+        async getCategories(page = 1){
+           
+            await axios.get(`/api/category-list?page=${page}&total=${this.per_page}`).then(response=>{
+                this.categories = response.data.categories.data;
+                this.pageInfo = response.data.categories
+                
             }).catch(error=>{
                 console.log(error)
                 this.categories = []
             })
         },
         async deleteCategory(id){
+
             if(confirm("Are you sure to delete this category ?")){
                 await axios.delete(`/api/delete-category/${id}`).then(response=>{
                     if(response.data.code == 200){

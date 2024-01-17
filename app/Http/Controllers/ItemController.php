@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function items()
+    public function items(Request $request)
     {
-        $items = Item::all();
+        $items = Item::orderBy('id', 'asc')->paginate($request->total);
         return response()->json(
             [
                 'items' => $items,

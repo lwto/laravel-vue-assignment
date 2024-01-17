@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function categories()
+    public function categories(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'asc')->paginate($request->total);
         return response()->json(
             [
                 'categories' => $categories,
